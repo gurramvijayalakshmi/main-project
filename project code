@@ -1,0 +1,177 @@
+from tkinter import *
+import tkinter.messagebox
+from PIL import Image,ImageTk
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+from sklearn.model_selection import train_test_split
+
+
+def MAIN():
+    R1=Tk()
+    R1.geometry('900x600')
+    R1.title('Crop Recognition')
+
+    image=Image.open('w.jpg')
+    image=image.resize((900,600))
+    photo_image=ImageTk.PhotoImage(image)
+    l=Label(R1, image=photo_image)
+    l.place(x=0, y=0)
+
+    l=Label(R1, text="WELCOME TO CROP PREDICTON PORTAL",font=('algerain',14), bg="lightblue")
+    l.place(x=180, y=30)
+
+    b1=Button(R1, text="rainfall",width=10,height=2,font=('algerain',14), bg="lightblue", fg="red", command=rainfall)
+    b1.place(x=250, y=400)
+
+    b2=Button(R1, text="crop",width=10,height=2, font=('algerain',14), bg="lightblue", fg="red", command=apply)
+    b2.place(x=420, y=400)
+
+    R1.mainloop()    
+  #train the dataset
+def rainfall():
+      
+    import numpy as np  
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    # Importing the dataset
+    dataset = pd.read_csv('rainfall.csv')
+
+    #Split the X & Y variable
+    X = dataset.iloc[:, [0,1]].values
+    y = dataset.iloc[:,2].values
+
+    #Encoding Y variable
+    from sklearn.preprocessing import LabelEncoder
+    labelencoder_y= LabelEncoder()
+    #Y=Y.shape
+    #Y=Y.reshape(-1,1)
+    y = labelencoder_y.fit_transform(y)
+    #print(Y)
+
+    # Splitting the dataset into the Training set and Test set
+    from sklearn.model_selection import train_test_split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 0)
+
+    # Feature Scaling
+    from sklearn.preprocessing import StandardScaler
+    sc = StandardScaler()
+    #X_train = pd.get_dummies(0,1)
+    X_train = sc.fit_transform(X_train)
+    X_test = sc.transform(X_test)
+
+    # Fitting RF to the Training set
+    from sklearn.ensemble import RandomForestClassifier
+    classifier = RandomForestClassifier()
+    classifier.fit(X_train, y_train)
+
+    # Predicting the Test set results
+    y_pred = classifier.predict(X_test)
+
+    z = classifier.predict([[2,1998]])
+    print(z)
+
+
+  #predict the dataset
+
+
+def apply():
+    def a1():
+        N = e1.get()
+        P = e2.get()
+        K = e3.get()
+        rainfall = e4.get()
+           
+           
+            
+        import numpy as np  
+        import matplotlib.pyplot as plt
+        import pandas as pd
+
+        # Importing the dataset
+        dataset = pd.read_csv('Crop_recommendation.csv')
+
+        #Split the X & Y variable
+        X = dataset.iloc[:,0:4]
+
+        y = dataset.iloc[:,[4]]
+
+        from sklearn.model_selection import train_test_split
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 0)
+
+        from sklearn.ensemble import RandomForestClassifier
+        classifier = RandomForestClassifier()
+        classifier.fit(X_train, y_train)
+
+
+        # Predicting the Test set results
+        z = classifier.predict([[N,P,K,rainfall]])
+        arr = np.array(['rice', 'maize', 'chickpea', 'kidneybeans','pigeonpeas','mothbeans','mungbean','blackgram', 'lentil', 'pomegranate', 'banana','mango','grapes','watermelon','muskmelon', 'apple', 'orange', 'papaya','coconut','cotton','jute','coffee'])
+        
+        print(arr[z])
+        ts = arr[z].tostring()
+        z=str(arr[z])
+        print(z)
+
+
+        z=z+".txt"
+        f=open(z,"rb")
+        print(f.read())
+
+            
+            
+            
+    #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            
+            
+    window9 = Tk()
+    window9.geometry('900x700')
+    '''image=Image.open('download (5).jpg')
+    image=image.resize((900,700))
+    photo_image=ImageTk.PhotoImage(image)
+    label=Label(window9,image=photo_image)
+    label.place(x=0,y=0)'''
+        
+    lb1 = Label(window9, text="CROP PREDICTION AND RECOMMANDATION USING MACHINE LEARNING TECHNIC",font=('algerian',15,'bold'),justify='center',fg="BLUE")
+    lb1.place(x=20, y=70)
+
+
+        
+    lb1 = Label(window9, text="N",font=('algerian',15,'bold'),fg="BLUE",anchor='w')
+    lb1.place(x=50, y=150)
+    e1= Entry(window9,width=10,font=("bold",15),highlightthickness=2,bg="WHITE",relief=SUNKEN)
+    e1.place(x=200, y=150)
+
+        
+    lb2 = Label(window9, text="P",font=('algerian',15,'bold'),fg="BLUE",anchor='w')
+    lb2.place(x=50, y=230)
+    e2= Entry(window9,width=10,font=("bold",15),highlightthickness=2,bg="WHITE",relief=SUNKEN)
+    e2.place(x=200, y=230)
+
+    lb3 = Label(window9, text="K",font=('algerian',15,'bold'),fg="BLUE",anchor='w')
+    lb3.place(x=50, y=300)
+    e3= Entry(window9,width=10,font=("bold",15),highlightthickness=2,bg="WHITE",relief=SUNKEN)
+    e3.place(x=200, y=300) 
+
+    lb4 = Label(window9, text="Rain_fall",font=('algerian',15,'bold'),fg="BLUE",anchor='w')
+    lb4.place(x=50, y=400)
+    e4= Entry(window9,width=10,font=("bold",15),highlightthickness=2,bg="WHITE",relief=SUNKEN)
+    e4.place(x=200, y=400)
+
+        
+        
+    btn1 = Button(window9, text="CROP PREDICTION", width=15, height=1,fg="black",font=('algerian',15,'bold'),bg="SKYBLUE",justify='center',command=a1)
+    btn1.place(x=400, y=500)
+
+    window9.mainloop()
+
+    
+
+  #GUI   
+  
+
+
+    
+MAIN()
