@@ -1,0 +1,222 @@
+1.
+class sample{
+public static void main(String[] args)
+{
+int n=Integer.parseInt(args[0]);
+if(n>0)
+{
+System.out.println("Positive");
+}
+else if(n<0)
+{
+System.out.println("Negative");
+}
+else
+{
+System.out.println("Zero");
+}
+}
+}
+
+
+2.
+class sample{
+public static void main(String[] args)
+{
+int n1=Integer.parseInt(args[0]);
+int n2=Integer.parseInt(args[1]);
+int c=(n1>n2)?n1:n2;
+System.out.println(c);
+}
+}
+
+
+3.
+class sample{
+public static void main(String[] args)
+{
+int n1=Integer.parseInt(args[0]);
+if(n1%2==0)
+{
+System.out.println("Even");
+}
+else
+{
+System.out.println("Odd");
+}
+}
+}
+
+
+4.
+class sample{
+public static void main(String[] args)
+{
+int n1=Integer.parseInt(args[0]);
+int n2=Integer.parseInt(args[1]);
+int c=n1+n2;
+if(c%2==0)
+{
+System.out.println("Even");
+}
+else
+{
+System.out.println("Odd");
+}
+}
+}
+
+Looping
+1.
+class sample{
+public static void main(String[] args)
+{
+for(int i=0;i<=100;i++)
+{
+System.out.println(i);
+}
+}
+}
+
+2.
+class sample{
+public static void main(String[] args)
+{
+for(int i=1;i<=100;i+=2)
+{
+System.out.println(i);
+}
+}
+}
+
+3.
+class sample{
+public static void main(String[] args)
+{
+for(int i=0;i<=100;i+=2)
+{
+System.out.println(i);
+}
+}
+}
+MD ARRAY
+class sample{
+public static void main(String[] args)
+{
+int[][] x=new int[3][];
+x[0]=new int[3];
+x[1]=new int[2];
+x[2]=new int[5];
+for(int i=0;i<x.length;i++)
+{
+for(int j=0;j<x[i].length;j++)
+{
+x[i][j]=i;
+System.out.print(x[i][j]);
+}
+System.out.println();
+}
+}
+}
+
+4.
+class sample{
+public static void main(String[] args)
+{
+for(int i=100;i>=0;i--)
+{
+System.out.println(i);
+}
+}
+}
+
+5.
+class sample{
+public static void main(String[] args)
+{
+for(int i=100;i>=0;i-=3)
+{
+System.out.println(i);
+}
+}
+}
+OBJECTS:
+class employee{
+int id;
+String name;
+int sal;
+
+void setId(int n)
+{
+id=n;
+}
+void setName(String y)
+{
+name=y;
+}
+void setSal(int s){
+sal=s;
+}
+void getEmpDetails()
+{
+System.out.println(name+" salary is "+sal);
+}
+}
+public class EmpDemo{
+public static void main(String[] args)
+{
+employee emp1=new employee();
+emp1.setId(101);
+emp1.setName("Ramya");
+emp1.setSal(40000);
+emp1.getEmpDetails();
+}
+}
+
+
+class sample
+{
+private int id;
+sample()
+{
+this(102);
+System.out.println("Default Constructor with id:"+id);
+}
+sample(int no)
+{
+id=no;
+System.out.println("Default Constructer with arguments with id:"+id);
+}
+}
+public class Demo
+{
+public static void main(String[] args)
+{
+sample s1=new sample();
+sample s2=new sample(3122);
+}
+}
+
+class A
+{
+A()
+{
+System.out.println("hello a");
+}
+A(int x)
+{
+this();
+System.out.println(x);
+}
+}
+class TextThis
+{
+public static void main(String[] args)
+{
+A ob=new A(10);
+}
+}
+
+
+
+
